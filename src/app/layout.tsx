@@ -11,11 +11,11 @@ const cormorant = Cormorant_Garamond({
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Alt for Norge – Hans Majestæt Kong Haakon den Ottende",
+  title: "Alt for Norge – Hands Majestet Kong Haakon den Ottende",
   description:
-    "En Hædersside for Hans Majestæt Kong Haakon den Ottende, Konge af Norge fra den 28. Augusti MMXXVI.",
+    "En Hædersside for Hands Majestet Kong Haakon den Ottende, Konge af Norge fra den 28. Augusti MMXXVI.",
   openGraph: {
-    title: "Alt for Norge – Hans Majestæt Kong Haakon den Ottende",
+    title: "Alt for Norge – Hands Majestet Kong Haakon den Ottende",
     description: "Reist til Hæder for Norges Konge. Alt for Norge.",
     locale: "nb_NO",
     type: "website",

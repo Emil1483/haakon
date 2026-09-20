@@ -32,7 +32,7 @@ export default function Home() {
             </p>
 
             <h1 className="display mt-5 max-w-4xl animate-rise font-serif text-[clamp(2.6rem,6.5vw,5.4rem)] [animation-delay:120ms]">
-              Hans Majestæt Kong Haakon den Ottende
+              Hands Majestet Kong Haakon den Ottende
             </h1>
 
             <p className="mt-7 max-w-xl animate-rise text-base leading-relaxed text-muted [animation-delay:240ms]">
@@ -246,7 +246,7 @@ export default function Home() {
             {motto.text.toUpperCase().replace(".", "")}
           </p>
           <p className="text-xs leading-relaxed text-muted">
-            Reist til Hæder for Hans Majestæt Kong Haakon den Ottende. Ingen
+            Reist til Hæder for Hands Majestet Kong Haakon den Ottende. Ingen
             officiel Side for Det Kongelige Hus, og ei heller for Broderskabet.
           </p>
         </div>

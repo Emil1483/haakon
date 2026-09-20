@@ -1,6 +1,6 @@
 # haakon
 
-En Hædersside for Hans Majestæt Kong Haakon den Ottende, Konge af Norge fra
+En Hædersside for Hands Majestet Kong Haakon den Ottende, Konge af Norge fra
 den 28. august 2026.
 
 Next.js (App Router, Tailwind v4), bygget som Docker-image i GitHub Actions og
