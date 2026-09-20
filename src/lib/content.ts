@@ -1,3 +1,101 @@
+/**
+ * All prose on this site is written in the archaic Dano-Norwegian register
+ * used by Sanctus Omega Broderskab: pre-1907 spelling ("af", "Aar", "-skab",
+ * "-hed"), capitalised nouns and Roman numerals for years.
+ */
+
+export type ImageCredit = {
+  /** Path under /public. */
+  src: string;
+  width: number;
+  height: number;
+  /** Alt text, in modern Norwegian: read aloud, archaic spelling only confuses. */
+  alt: string;
+  /** Caption shown with the image, in the archaic register. */
+  caption: string;
+  author: string;
+  license: string;
+  licenseUrl: string;
+  sourceUrl: string;
+};
+
+export const images = {
+  portrait: {
+    src: "/images/haakon-2026.jpg",
+    width: 1200,
+    height: 1801,
+    alt: "Portrett av Haakon, fotografert i Oslo i 2026",
+    caption: "Hs. Majestæt, afbildet i Christiania Anno MMXXVI",
+    author: "Vadim Chuprina",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Crown_Prince_Haakon-Norway-Oslo-2026-Vadim-Chuprina.jpg",
+  },
+  audience: {
+    src: "/images/haakon-2025.jpg",
+    width: 799,
+    height: 1128,
+    alt: "Haakon under en audiens i Oslo i desember 2025",
+    caption: "Ved Audients paa Slottet, Decembris MMXXV",
+    author: "Presidencia de la República del Ecuador",
+    license: "Offentlig eiendom",
+    licenseUrl: "https://commons.wikimedia.org/wiki/Help:Public_domain",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Pr%C3%ADncipe_Heredero_Haakon_Magnus_2025.jpg",
+  },
+  consort: {
+    src: "/images/haakon-mette-marit-2015.jpg",
+    width: 1200,
+    height: 1202,
+    alt: "Haakon og Mette-Marit i Stockholm i 2015",
+    caption: "Med sin Gemalinde, Stockholm Anno MMXV",
+    author: "Frankie Fouganthin",
+    license: "CC BY-SA 4.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Mette-Marit,_Crown_Princess_of_Norway_and_Haakon,_Crown_Prince_of_Norway_in_2015.jpg",
+  },
+  young: {
+    src: "/images/haakon-2010.jpg",
+    width: 1200,
+    height: 1800,
+    alt: "Haakon fotografert i 2010",
+    caption: "Som Kronprins, Anno MMX",
+    author: "Kronprinsparets Fond",
+    license: "CC BY 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by/3.0",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Crown_Prince_Haakon_of_Norway_2010-09-06_001.jpg",
+  },
+  learning: {
+    src: "/images/haakon-ntnu-2019.jpg",
+    width: 1200,
+    height: 893,
+    alt: "Haakon besøker en utstilling ved NTNU i Trondheim i 2019",
+    caption:
+      "Ved Norges Tekniske Høiskole i Throndhjem, Anno MMXIX — hvor Broderskabet har sit Sæde",
+    author: "NTNU – Norges teknisk-naturvitenskapelige universitet",
+    license: "CC BY-SA 2.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0",
+    sourceUrl:
+      "https://commons.wikimedia.org/wiki/File:Haakon,_Crown_Prince_of_Norway_visiting_the_exhibition_The_Micro_Challenge_(48082453771).jpg",
+  },
+  address: {
+    src: "/images/haakon-2009.jpg",
+    width: 936,
+    height: 1404,
+    alt: "Haakon holder tale i 2009",
+    caption: "I Tale for Næringslivets Mænd, Anno MMIX",
+    author: "Kjetil Ree",
+    license: "CC BY-SA 3.0",
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Haakon_Magnus_01.jpg",
+  },
+} satisfies Record<string, ImageCredit>;
+
+export const credits: ImageCredit[] = Object.values(images);
+
 export type TimelineEntry = {
   year: string;
   date: string;
@@ -7,76 +105,64 @@ export type TimelineEntry = {
 
 export const timeline: TimelineEntry[] = [
   {
-    year: "1872",
-    date: "3. august 1872",
-    title: "Prins Carl av Danmark blir født",
-    body: "Født på Charlottenlund slott som andre sønn av kronprins Frederik av Danmark og prinsesse Louise av Sverige-Norge. Han ble oppdratt til et liv i den danske marinen, ikke til en trone.",
+    year: "MCMLXXIII",
+    date: "XX. Julii MCMLXXIII",
+    title: "Prinsen fødes paa Rigshospitalet",
+    body: "Anden Livsarving af Kong Harald den Femte og Dronning Sonja kom til Verden i Christiania, og blev døbt Haakon Magnus — Navnet efter hans Oldefader, som tog Riget i Eie Anno MCMV.",
   },
   {
-    year: "1896",
-    date: "22. juli 1896",
-    title: "Gifter seg med prinsesse Maud",
-    body: "Bryllup i Buckingham Palace med prinsesse Maud av Wales, datter av den senere kong Edvard VII. Hun ble Norges dronning Maud.",
+    year: "MCMXC",
+    date: "Anno MCMXC",
+    title: "Grundloven vender Arvefølgen",
+    body: "Stortinget vedtog, at Førstefødselsretten herefter skulde gjælde uden Hensyn til Kjøn. For Prinsen selv blev intet forandret; for hans Datter blev alt.",
   },
   {
-    year: "1903",
-    date: "2. juli 1903",
-    title: "Sønnen Alexander blir født",
-    body: "Prins Alexander, som ved ankomsten til Norge fikk navnet Olav – den første tronarvingen født i Norden på over 500 år som skulle bli norsk konge.",
+    year: "MCMXCV",
+    date: "Anno MCMXCV",
+    title: "Sjøkrigsskolen",
+    body: "Lærdom i Sjøvæsenet og Tjeneste ved Marinen. Huset har siden MCMV holdt det for en Pligt, at den som skal bære Kronen først har baaret Uniformen.",
   },
   {
-    year: "1905",
-    date: "12.–13. november 1905",
-    title: "Folket sier ja",
-    body: "Etter unionsoppløsningen ble styreformen lagt ut til folkeavstemning. Prins Carl hadde satt som betingelse at han ikke ville komme som et vedtak i Stortinget, men som folkets valg. Nær 79 prosent stemte for kongedømmet.",
+    year: "MCMXCIX",
+    date: "Anno MCMXCIX",
+    title: "Studier i Californien",
+    body: "Bachelorgrad i Statsvidenskab ved Universitetet i Berkeley, og senere Magistergrad i Udviklingsstudier ved Høiskolen i London. En Kronprins skolet i Forvaltning, ikke alene i Ceremoni.",
   },
   {
-    year: "1905",
-    date: "25. november 1905",
-    title: "Kong Haakon VII kommer til Norge",
-    body: "Han gikk i land i Kristiania med sin toårige sønn på armen, tok navnet Haakon VII etter middelalderens norske konger, og valgte valgspråket «Alt for Norge».",
+    year: "MMI",
+    date: "XXV. Augusti MMI",
+    title: "Brudevielse i Vor Frelsers Kirke",
+    body: "Ægteskab med Mette-Marit Tjessem Høiby i Christiania Domkirke. Forbindelsen var omstridt i Aviserne og i Stortingets Vandelganger; Folket dømte mildere end Bladene.",
   },
   {
-    year: "1906",
-    date: "22. juni 1906",
-    title: "Kroning i Nidarosdomen",
-    body: "Kroningen i Trondheim ble den siste i norsk historie. Kroningsparagrafen ble senere fjernet fra Grunnloven, og etterfølgerne har i stedet blitt signet.",
+    year: "MMIV",
+    date: "XXI. Januarii MMIV",
+    title: "Prindsesse Ingrid Alexandra",
+    body: "Datteren fødes, og bliver ved den nye Arvefølge Rigets Tronarving — den første Kvinde i Norges Historie som fødes til at arve Kronen uhindret.",
   },
   {
-    year: "1928",
-    date: "28. januar 1928",
-    title: "Kongen utnevner Norges første Arbeiderparti-regjering",
-    body: "Regjeringen Hornsrud hadde ikke flertall bak seg, og kongen ble frarådet å utnevne den. Han holdt seg til parlamentarisk praksis og sa at han også var kommunistenes konge.",
+    year: "MMV",
+    date: "III. Decembris MMV",
+    title: "Prinds Sverre Magnus",
+    body: "Sønnen fødes, anden i Rækken efter sin Søster. Familien holder Hus paa Skaugum i Asker, som Skik har været siden Kong Olavs Dage.",
   },
   {
-    year: "1940",
-    date: "10. april 1940",
-    title: "Neiet på Elverum",
-    body: "Den tyske sendemannen krevde at kongen skulle utnevne Vidkun Quisling til statsminister. Haakon VII stilte sin egen abdikasjon til regjeringens disposisjon framfor å bøye seg – og regjeringen fulgte kongen.",
+    year: "MMIII",
+    date: "MMIII–MMXXVI",
+    title: "Regent i Faderens Sted",
+    body: "Under Kongens Sygdom førte Kronprinsen Regjeringens Forretninger som Regent — første Gang Anno MMIII, og siden gjentagne Gange i de Aar som fulgte. Han havde altsaa gjort Gjerningen længe før han fik Navnet.",
   },
   {
-    year: "1940",
-    date: "7. juni 1940",
-    title: "Til England",
-    body: "Etter to måneders felttog forlot kongen og regjeringen Tromsø om bord i den britiske krysseren HMS Devonshire. Kampen ble ført videre fra London.",
+    year: "MMIII",
+    date: "Anno MMIII og MMVI",
+    title: "Gode Gjerninger uden for Riget",
+    body: "Udnævnt til De Forenede Nationers Velvillighedssendemand for Udviklingsprogrammet, og siden Medstifter af Global Dignity, som lærer unge Mennesker om Menneskets Værdighed.",
   },
   {
-    year: "1940",
-    date: "1940–1945",
-    title: "H7 blir motstandens tegn",
-    body: "Kongens monogram ble malt på vegger, tegnet i snøen og båret som nål på jakkeslaget. Radiotalene fra London bandt et okkupert land til en konge i eksil.",
-  },
-  {
-    year: "1945",
-    date: "7. juni 1945",
-    title: "Hjemkomsten",
-    body: "På dagen fem år etter avreisen fra Tromsø – og førti år etter unionsoppløsningen – kom kongen tilbake til Oslo. Havnen og gatene var fulle av mennesker.",
-  },
-  {
-    year: "1957",
-    date: "21. september 1957",
-    title: "Folkekongen dør",
-    body: "Haakon VII døde på Det kongelige slott, 85 år gammel, etter 51 år på tronen. Sønnen Olav V overtok.",
+    year: "MMXXVI",
+    date: "XXVIII. Augusti MMXXVI, Kl. 06.35",
+    title: "Kongen er død — leve Kongen",
+    body: "Hans Majestæt Kong Harald den Femte sov hen paa Rigshospitalet i Oslo, en Fredag Morgen. I samme Stund gik Kronen over til hans Søn, som besteg Tronen under Navnet Haakon den Ottende.",
   },
 ];
 
@@ -84,24 +170,24 @@ export type Fact = { label: string; value: string; note: string };
 
 export const facts: Fact[] = [
   {
-    label: "Valgspråk",
-    value: "Alt for Norge",
-    note: "Valgt av kongen selv i 1905, og båret av tre konger etter ham.",
+    label: "Fød",
+    value: "XX. Julii MCMLXXIII",
+    note: "Paa Rigshospitalet i Christiania, som Søn af Harald V og Sonja.",
   },
   {
-    label: "År på tronen",
-    value: "51",
-    note: "1905–1957, den lengste sammenhengende regjeringstiden i moderne norsk historie fram til i dag.",
+    label: "Konge siden",
+    value: "MMXXVI",
+    note: "Fra den 28. Augusti MMXXVI, Kl. 06.35, i samme Stund som hans Fader sov hen.",
   },
   {
-    label: "Folkeavstemning",
-    value: "78,9 %",
-    note: "Andelen som stemte for kongedømme i november 1905.",
+    label: "Fjerde Regent",
+    value: "IV",
+    note: "Af Huset Glücksborg paa Norges Trone siden Folkets Ja Anno MCMV.",
   },
   {
-    label: "Dager i eksil",
-    value: "1 826",
-    note: "Fra avreisen fra Tromsø 7. juni 1940 til hjemkomsten til Oslo 7. juni 1945.",
+    label: "Tronarving",
+    value: "Ingrid Alexandra",
+    note: "Rigets første Kvinde fød til Kronen med uhindret Førstefødselsret.",
   },
 ];
 
@@ -109,12 +195,12 @@ export type Quote = { text: string; source: string };
 
 export const quotes: Quote[] = [
   {
-    text: "For min egen del kan jeg ikke motta de tyske krav. Det ville stride mot alt som jeg har ansett som min plikt som Norges konge siden jeg kom til landet for snart trettifem år siden.",
+    text: "Alt for Norge.",
     source:
-      "Gjengitt fra kongens svar til regjeringen på Nybergsund ved Elverum, 10. april 1940",
+      "Husets Valgsprog, valgt af Haakon den Syvende Anno MCMV og baaret af hver Konge siden",
   },
   {
-    text: "Alt for Norge.",
-    source: "Kongens valgspråk, valgt ved tronbestigelsen i 1905",
+    text: "Kongen er død. Leve Kongen!",
+    source: "Den gamle Formel, som holder Riget helt i det Øieblik det skifter Herre",
   },
 ];

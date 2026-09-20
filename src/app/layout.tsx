@@ -11,13 +11,12 @@ const cormorant = Cormorant_Garamond({
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Alt for Norge – Hans Majestet Kong Haakon VII",
+  title: "Alt for Norge – Hans Majestæt Kong Haakon den Ottende",
   description:
-    "En hyldest til Hans Majestet Kong Haakon VII (1872–1957), Norges første konge etter 1905 og folkekongen som sa nei i april 1940.",
+    "En Hædersside for Hans Majestæt Kong Haakon den Ottende, Konge af Norge fra den 28. Augusti MMXXVI.",
   openGraph: {
-    title: "Alt for Norge – Hans Majestet Kong Haakon VII",
-    description:
-      "En hyldest til Norges folkekonge, 1905–1957. Alt for Norge.",
+    title: "Alt for Norge – Hans Majestæt Kong Haakon den Ottende",
+    description: "Reist til Hæder for Norges Konge. Alt for Norge.",
     locale: "nb_NO",
     type: "website",
   },

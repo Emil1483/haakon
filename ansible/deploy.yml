@@ -11,7 +11,6 @@
     caddyfile: /root/caddy/Caddyfile
     caddy_container: caddy
     domain: haakon.linode.djupvik.dev
-    # 3101 and 3102 are taken by plant-thing on this host.
     website_host_port: 3103
     website_image: ghcr.io/emil1483/haakon
 
@@ -53,7 +52,6 @@
         project_src: "{{ deploy_dir }}"
         pull: always
         state: present
-        # The tag changes every commit; recreate the container whenever it does.
         recreate: auto
 
     - name: Configure Caddyfile

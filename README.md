@@ -1,6 +1,7 @@
 # haakon
 
-En hyldest til Hans Majestet Kong Haakon VII (1872–1957).
+En Hædersside for Hans Majestæt Kong Haakon den Ottende, Konge af Norge fra
+den 28. august 2026.
 
 Next.js (App Router, Tailwind v4), bygget som Docker-image i GitHub Actions og
 deployet med Ansible til `haakon.linode.djupvik.dev`.
@@ -14,8 +15,15 @@ npm run build
 npx eslint
 ```
 
-Innholdet — tidslinje, nøkkeltall og sitater — ligger samlet i
-`src/lib/content.ts`.
+All tekst — tidslinje, nøkkeltall, sitater og bildekreditering — ligger samlet
+i `src/lib/content.ts`. Prosaen er skrevet i dansk-norsk rettskriving fra før
+1907, i samme register som Sanctus Omega Broderskab bruker.
+
+Fotografiene i `public/images/` er hentet fra Wikimedia Commons, nedskalert til
+1200 px og komprimert på forhånd; derfor står `images.unoptimized` i
+`next.config.ts`, slik at runtime slipper å ha `sharp`. Opphavsmann og lisens
+for hvert bilde står i `src/lib/content.ts` og listes nederst på siden — det er
+et vilkår for CC BY- og CC BY-SA-bildene.
 
 ## Deploy
 

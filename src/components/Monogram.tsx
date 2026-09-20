@@ -1,13 +1,13 @@
 /**
- * The H7 monogram. Painted on walls, worn as a pin and scratched into snow,
- * it became the silent answer to the occupation between 1940 and 1945.
+ * The royal cypher, H8, under a crown: the mark of the reigning king, drawn in
+ * the same manner as the monograms borne by the house since 1905.
  */
 export default function Monogram({ className }: { className?: string }) {
   return (
     <svg
       viewBox="0 0 200 200"
       role="img"
-      aria-label="Kong Haakon VIIs monogram, H7, under en krone"
+      aria-label="Kong Haakon VIIIs monogram, H8, under en krone"
       className={className}
     >
       <defs>
@@ -55,7 +55,7 @@ export default function Monogram({ className }: { className?: string }) {
         fontSize="78"
         fill="url(#monogram-gold)"
       >
-        H7
+        H8
       </text>
     </svg>
   );
