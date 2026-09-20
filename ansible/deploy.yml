@@ -1,0 +1,82 @@
+# ansible-playbook -i inventory.yml --vault-id default@/etc/ansible_pass_private deploy.yml --diff \
+#   --extra-vars '{"tag": "...", "ghcr_username": "...", "ghcr_token": "..."}'
+
+- name: Deploy haakon
+  hosts: dev_server
+  become: true
+  gather_facts: false
+
+  vars:
+    deploy_dir: /root/haakon
+    caddyfile: /root/caddy/Caddyfile
+    caddy_container: caddy
+    domain: haakon.linode.djupvik.dev
+    # 3101 and 3102 are taken by plant-thing on this host.
+    website_host_port: 3103
+    website_image: ghcr.io/emil1483/haakon
+
+  tasks:
+    - name: Install Docker SDK
+      apt:
+        name: python3-docker
+        state: present
+
+    - name: Log in to GHCR
+      community.docker.docker_login:
+        registry_url: ghcr.io
+        username: "{{ ghcr_username }}"
+        password: "{{ ghcr_token }}"
+
+    - name: Ensure the deploy directory exists
+      file:
+        path: "{{ deploy_dir }}"
+        state: directory
+        mode: "0755"
+
+    - name: Upsert compose file
+      copy:
+        src: "{{ playbook_dir }}/../deploy/compose.yml"
+        dest: "{{ deploy_dir }}/compose.yml"
+        mode: "0644"
+
+    - name: Upsert compose environment
+      copy:
+        dest: "{{ deploy_dir }}/.env"
+        content: |
+          TAG={{ tag }}
+          WEBSITE_IMAGE={{ website_image }}
+          WEBSITE_HOST_PORT={{ website_host_port }}
+        mode: "0644"
+
+    - name: Pull and (re)start the app
+      community.docker.docker_compose_v2:
+        project_src: "{{ deploy_dir }}"
+        pull: always
+        state: present
+        # The tag changes every commit; recreate the container whenever it does.
+        recreate: auto
+
+    - name: Configure Caddyfile
+      blockinfile:
+        path: "{{ caddyfile }}"
+        create: true
+        marker: "# {mark} ANSIBLE MANAGED HAAKON BLOCK"
+        block: |
+          {{ domain }} {
+            reverse_proxy 127.0.0.1:{{ website_host_port }} {
+              transport http {
+                keepalive 60m
+                keepalive_interval 10s
+              }
+            }
+          }
+      notify: Restart Caddy
+
+    - name: Prune dangling images
+      community.docker.docker_prune:
+        images: true
+
+  handlers:
+    - name: Restart Caddy
+      command:
+        cmd: docker restart {{ caddy_container }}

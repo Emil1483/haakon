@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+
+permissions:
+  contents: read
+  packages: write
+
+# One deploy at a time per branch; a rapid series of pushes should not race
+# each other onto the server.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  WEBSITE_IMAGE: ghcr.io/emil1483/haakon
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: ${{ env.WEBSITE_IMAGE }}:${{ github.sha }}
+          cache-from: type=registry,ref=${{ env.WEBSITE_IMAGE }}:buildcache
+          cache-to: type=registry,ref=${{ env.WEBSITE_IMAGE }}:buildcache,mode=max
+          provenance: false
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Create ansible configuration directory
+        run: sudo mkdir -p /etc/ansible
+
+      - name: Create Ansible configuration file
+        run: |
+          sudo tee /etc/ansible/ansible.cfg <<EOF
+          [defaults]
+          host_key_checking = False
+          EOF
+
+      - name: Setting ansible vault password
+        run: echo '${{ secrets.ANSIBLE_VAULT_PASS }}' | sudo tee /etc/ansible_pass
+        shell: bash
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y software-properties-common
+          sudo add-apt-repository --yes --update ppa:ansible/ansible
+          sudo apt-get install -y ansible sshpass
+          sudo pip install docker
+
+      - name: Run ansible script
+        shell: bash
+        working-directory: ansible
+        run: |
+          ansible-playbook -i inventory.yml --vault-id default@/etc/ansible_pass \
+            deploy.yml --diff \
+            --extra-vars '{"tag": "${{ github.sha }}", "ghcr_username": "${{ github.actor }}", "ghcr_token": "${{ secrets.GITHUB_TOKEN }}"}'

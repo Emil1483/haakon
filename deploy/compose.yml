@@ -1,0 +1,9 @@
+# The site is stateless; Caddy terminates TLS in front of it, so the container
+# is only published on loopback.
+
+services:
+  website:
+    image: ${WEBSITE_IMAGE}:${TAG}
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:${WEBSITE_HOST_PORT}:3000"
