@@ -19,7 +19,10 @@ All tekst — tidslinje, nøkkeltall, sitater og bildekreditering — ligger sam
 i `src/lib/content.ts`. Prosaen er skrevet i dansk-norsk rettskriving fra før
 1907, i samme register som Sanctus Omega Broderskab bruker.
 
-Fotografiene i `public/images/` er hentet fra Wikimedia Commons, nedskalert til
+Hero-bildet (`haakon-royal-portrait.jpg`) er det offisielle portrettet fra Det
+kongelige hoff, levert av eier av dette repoet; det står ikke under fri lisens,
+og repoet er offentlig. De øvrige fotografiene i `public/images/` er hentet fra
+Wikimedia Commons, nedskalert til
 1200 px og komprimert på forhånd; derfor står `images.unoptimized` i
 `next.config.ts`, slik at runtime slipper å ha `sharp`. Opphavsmann og lisens
 for hvert bilde står i `src/lib/content.ts` og listes nederst på siden — det er

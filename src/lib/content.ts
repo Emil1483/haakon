@@ -15,11 +15,22 @@ export type ImageCredit = {
   caption: string;
   author: string;
   license: string;
-  licenseUrl: string;
-  sourceUrl: string;
+  /** Absent for material that is not under a public licence. */
+  licenseUrl?: string;
+  sourceUrl?: string;
 };
 
 export const images = {
+  banner: {
+    src: "/images/haakon-royal-portrait.jpg",
+    width: 1544,
+    height: 586,
+    alt: "Offisielt portrett av kong Haakon i gallauniform, ved siden av kongens monogram",
+    caption: "Det officielle Portræt, i Gallauniform med Ordener og Baand",
+    author: "Det Kongelige Hoff",
+    license: "Gjengivet efter Rettighedshaverens Velvilje",
+    sourceUrl: "https://www.kongehuset.no/",
+  },
   portrait: {
     src: "/images/haakon-2026.jpg",
     width: 1200,
@@ -94,7 +105,18 @@ export const images = {
   },
 } satisfies Record<string, ImageCredit>;
 
-export const credits: ImageCredit[] = Object.values(images);
+export const monogramCredit = {
+  caption: "Kongens Monogram, farvelagt i Guld for denne Side",
+  author: "Glasshouse",
+  license: "CC BY 3.0",
+  licenseUrl: "https://creativecommons.org/licenses/by/3.0",
+  sourceUrl:
+    "https://commons.wikimedia.org/wiki/File:Royal_Monogram_of_Prince_Haakon_of_Norway.svg",
+} satisfies Omit<ImageCredit, "src" | "width" | "height" | "alt">;
+
+export const credits: (Omit<ImageCredit, "src" | "width" | "height" | "alt"> & {
+  src?: string;
+})[] = [...Object.values(images), monogramCredit];
 
 export type TimelineEntry = {
   year: string;

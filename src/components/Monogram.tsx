@@ -1,62 +1,25 @@
+import Image from "next/image";
+
 /**
- * The royal cypher, H8, under a crown: the mark of the reigning king, drawn in
- * the same manner as the monograms borne by the house since 1905.
+ * The royal cypher: a crowned H, drawn by Glasshouse for Wikimedia Commons
+ * (CC BY 3.0) and recoloured from its original red to the gold used here.
+ * Credited with the photographs at the foot of the page.
  */
-export default function Monogram({ className }: { className?: string }) {
+export default function Monogram({
+  className,
+  priority = false,
+}: {
+  className?: string;
+  priority?: boolean;
+}) {
   return (
-    <svg
-      viewBox="0 0 200 200"
-      role="img"
-      aria-label="Kong Haakon VIIIs monogram, H8, under en krone"
+    <Image
+      src="/images/monogram-haakon.svg"
+      width={213}
+      height={418}
+      alt="Kongens monogram: en kronet H"
+      priority={priority}
       className={className}
-    >
-      <defs>
-        <linearGradient id="monogram-gold" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#e6cd8b" />
-          <stop offset="55%" stopColor="#c8a349" />
-          <stop offset="100%" stopColor="#8f6f22" />
-        </linearGradient>
-      </defs>
-
-      <circle
-        cx="100"
-        cy="100"
-        r="92"
-        fill="none"
-        stroke="url(#monogram-gold)"
-        strokeWidth="1.5"
-        opacity="0.6"
-      />
-      <circle
-        cx="100"
-        cy="100"
-        r="84"
-        fill="none"
-        stroke="url(#monogram-gold)"
-        strokeWidth="0.75"
-        opacity="0.4"
-      />
-
-      {/* Crown */}
-      <g fill="url(#monogram-gold)">
-        <path d="M60 62 L70 34 L85 54 L100 26 L115 54 L130 34 L140 62 Z" />
-        <rect x="58" y="66" width="84" height="8" rx="2" />
-        <circle cx="70" cy="30" r="4.5" />
-        <circle cx="100" cy="22" r="5.5" />
-        <circle cx="130" cy="30" r="4.5" />
-      </g>
-
-      {/* H7 */}
-      <text
-        x="100"
-        y="152"
-        textAnchor="middle"
-        fontFamily="Georgia, 'Times New Roman', serif"
-        fontSize="78"
-        fill="url(#monogram-gold)"
-      >
-        H8
-      </text>
-    </svg>
+    />
   );
 }

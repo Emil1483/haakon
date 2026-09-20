@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import Monogram from "@/components/Monogram";
 import Portrait from "@/components/Portrait";
 import Timeline from "@/components/Timeline";
@@ -10,45 +12,38 @@ export default function Home() {
     <div className="flex min-h-screen flex-col">
       <main className="flex-1">
         {/* Hero ------------------------------------------------------- */}
-        <section className="relative overflow-hidden px-6 pt-16 pb-20 sm:pt-24 sm:pb-28">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(200,163,73,0.15),transparent_62%)]"
+        {/* The official portrait runs full bleed, with the titles laid over
+            its lower edge where the background is quiet. */}
+        <section className="relative isolate flex min-h-[72vh] items-end overflow-hidden sm:min-h-[82vh]">
+          <Image
+            src={images.banner.src}
+            alt={images.banner.alt}
+            fill
+            priority
+            sizes="100vw"
+            /* Narrow viewports crop towards the King rather than the cypher. */
+            className="-z-10 object-cover object-[72%_center] sm:object-center"
           />
+          <div className="-z-10 absolute inset-0 bg-gradient-to-t from-background via-background/75 to-background/10" />
 
-          <div className="relative mx-auto grid max-w-5xl items-center gap-14 sm:grid-cols-[1fr_auto]">
-            <div className="flex flex-col items-center text-center sm:items-start sm:text-left">
-              <Monogram className="w-24 animate-rise sm:w-28" />
+          <div className="mx-auto w-full max-w-[1400px] px-6 pb-14 sm:px-10 sm:pb-20">
+            <p className="eyebrow animate-rise">
+              Konge af Norge &middot; Anno Domini MMXXVI
+            </p>
 
-              <p className="eyebrow mt-8 animate-rise [animation-delay:120ms]">
-                Konge af Norge &middot; Anno Domini MMXXVI
-              </p>
+            <h1 className="display mt-5 max-w-4xl animate-rise font-serif text-[clamp(2.6rem,6.5vw,5.4rem)] [animation-delay:120ms]">
+              Hans Majestæt Kong Haakon den Ottende
+            </h1>
 
-              <h1 className="display mt-5 animate-rise font-serif text-5xl [animation-delay:200ms] sm:text-6xl">
-                Hans Majestæt
-                <br />
-                Kong Haakon
-                <br />
-                den Ottende
-              </h1>
+            <p className="mt-7 max-w-xl animate-rise text-base leading-relaxed text-muted [animation-delay:240ms]">
+              Denne Side er reist Broderskabet til Ære og Kongen til Hæder, paa
+              det at hans Navn og hans Gjerning skal staa skrevet ogsaa der hvor
+              Bogtrykkerkunsten ikke naar: paa Veven.
+            </p>
 
-              <p className="mt-8 max-w-md animate-rise text-base leading-relaxed text-muted [animation-delay:320ms]">
-                Denne Side er reist Broderskabet til Ære og Kongen til Hæder,
-                paa det at hans Navn og hans Gjerning skal staa skrevet ogsaa
-                der hvor Bogtrykkerkunsten ikke naar: paa Vævet.
-              </p>
-
-              <p className="mt-9 animate-rise font-serif text-2xl tracking-[0.2em] text-gold [animation-delay:440ms]">
-                ALT FOR NORGE
-              </p>
-            </div>
-
-            <Portrait
-              image={images.portrait}
-              sizes="(max-width: 640px) 90vw, 360px"
-              priority
-              className="mx-auto w-full max-w-[22rem] animate-rise [animation-delay:260ms]"
-            />
+            <p className="mt-8 animate-rise font-serif text-2xl tracking-[0.2em] text-gold [animation-delay:340ms]">
+              ALT FOR NORGE
+            </p>
           </div>
         </section>
 
@@ -68,7 +63,7 @@ export default function Home() {
             </figcaption>
           </figure>
 
-          <div className="mx-auto mt-16 grid max-w-4xl gap-8 sm:grid-cols-2">
+          <div className="mx-auto mt-16 grid max-w-4xl items-start gap-10 sm:grid-cols-[1fr_1fr_auto]">
             <p className="text-sm leading-relaxed text-muted">
               Fredag den 28. Augusti MMXXVI, Kl. 06.35, sov Hans Majestæt Kong
               Harald den Femte hen paa Rigshospitalet i Oslo. Riget mistede en
@@ -81,6 +76,11 @@ export default function Home() {
               var Konge førend Budskabet naaede Landet, og tog Navnet Haakon den
               Ottende efter sin Oldefader.
             </p>
+            <Portrait
+              image={images.portrait}
+              sizes="(max-width: 640px) 90vw, 220px"
+              className="mx-auto w-full max-w-[14rem]"
+            />
           </div>
         </section>
 
@@ -200,29 +200,38 @@ export default function Home() {
           <div className="mx-auto max-w-3xl">
             <p className="eyebrow text-center">Om Afbildningerne</p>
             <p className="mt-6 text-center text-sm leading-relaxed text-muted">
-              Samtlige Fotografier er hentede fra Wikimedia Commons og benyttede
-              paa de Vilkaar deres Ophavsmænd har sat.
+              De fleste Afbildninger er hentede fra Wikimedia Commons og
+              benyttede paa de Vilkaar deres Ophavsmænd har sat; det officielle
+              Portræt hører Det Kongelige Hoff til.
             </p>
             <ul className="mt-8 space-y-3 text-xs leading-relaxed text-muted">
               {credits.map((credit) => (
-                <li key={credit.src} className="flex flex-wrap gap-x-2">
-                  <a
-                    href={credit.sourceUrl}
-                    className="text-gold underline-offset-4 hover:underline"
-                    rel="noreferrer noopener"
-                    target="_blank"
-                  >
-                    {credit.caption}
-                  </a>
+                <li key={credit.caption} className="flex flex-wrap gap-x-2">
+                  {credit.sourceUrl ? (
+                    <a
+                      href={credit.sourceUrl}
+                      className="text-gold underline-offset-4 hover:underline"
+                      rel="noreferrer noopener"
+                      target="_blank"
+                    >
+                      {credit.caption}
+                    </a>
+                  ) : (
+                    <span className="text-gold">{credit.caption}</span>
+                  )}
                   <span>&mdash; {credit.author},</span>
-                  <a
-                    href={credit.licenseUrl}
-                    className="underline-offset-4 hover:underline"
-                    rel="noreferrer noopener license"
-                    target="_blank"
-                  >
-                    {credit.license}
-                  </a>
+                  {credit.licenseUrl ? (
+                    <a
+                      href={credit.licenseUrl}
+                      className="underline-offset-4 hover:underline"
+                      rel="noreferrer noopener license"
+                      target="_blank"
+                    >
+                      {credit.license}
+                    </a>
+                  ) : (
+                    <span>{credit.license}</span>
+                  )}
                 </li>
               ))}
             </ul>
@@ -231,7 +240,8 @@ export default function Home() {
       </main>
 
       <footer className="border-t border-line px-6 py-12">
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-3 text-center">
+        <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 text-center">
+          <Monogram className="h-16 w-auto opacity-90" />
           <p className="font-serif text-lg tracking-[0.2em] text-gold">
             {motto.text.toUpperCase().replace(".", "")}
           </p>

@@ -12,5 +12,8 @@ Hædersside for Kong Haakon VIII. Én Next.js-app i rota, ingen database.
   det dikes ikke opp uttalelser fra kongen.
 - Nye bilder hentes fra Wikimedia Commons under fri lisens, skaleres til 1200 px
   og føres opp med opphavsmann og lisens i `images` i `src/lib/content.ts`.
+- Unntaket er `haakon-royal-portrait.jpg` (hero) og monogrammet: portrettet er
+  Det kongelige hoffs og står ikke under fri lisens, monogrammet er Glasshouse'
+  SVG fra Commons (CC BY 3.0) omfarget til gull. Begge er kreditert nederst.
 - Deploy-oppsettet følger samme mønster som `plantegreie`: Docker-image til
   GHCR i Actions, Ansible legger ut compose-fila og en Caddy-blokk.
